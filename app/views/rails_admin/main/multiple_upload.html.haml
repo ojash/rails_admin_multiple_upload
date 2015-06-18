@@ -1,0 +1,7 @@
+- @object.notes.where(media_type: 'image', user_id: 1).each do |photo|
+  = link_to(image_tag(photo.image.thumb.url, size: '50'),rails_admin.show_url(photo.class.to_s, photo.id))
+
+= form_for(@object,url: rails_admin.multiple_upload_url, html: { multipart: true }) do |f|
+  = f.hidden_field :id
+  = file_field_tag('place_notes_image', multiple: true, name: "place[notes_attributes][][image]")
+  = f.submit :submit, value: 'Upload', name: 'Upload', :class => 'btn btn-primary'
